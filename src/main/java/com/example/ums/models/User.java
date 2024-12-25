@@ -1,7 +1,9 @@
 package com.example.ums.models;
 
 import lombok.*;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,10 +24,17 @@ public class User implements UserDetails {
     private String id;
 
     private String name;
+
+    @Indexed(unique = true)
     private String username;
+
+    @Indexed(unique = true)
     private String email;
+
     private String password;
+
     private Set<String> roles = new HashSet<>();
+
     private Boolean isEnable;
 
     @Override
